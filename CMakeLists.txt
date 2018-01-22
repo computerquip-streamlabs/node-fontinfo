@@ -17,6 +17,13 @@ ExternalProject_Add(
 	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${freetype2_INSTALL}
 )
 
+set(freetype2_INCLUDE_DIRS ${freetype2_INSTALL}/include/freetype2)
+set(freetype2_DEBUG_LIBRARY
+	${freetype2_INSTALL}/lib/freetyped${CMAKE_STATIC_LIBRARY_SUFFIX})
+	
+set(freetype2_RELEASE_LIBRARY
+	${freetype2_INSTALL}/lib/freetype${CMAKE_STATIC_LIBRARY_SUFFIX})
+
 set(fontinfo_SOURCES
 	src/fontinfo/fontinfo.c)
 	
@@ -26,12 +33,11 @@ set(fontinfo_HEADERS
 
 add_library(fontinfo STATIC ${fontinfo_SOURCES})
 
-target_include_directories(fontinfo PUBLIC
-	"${freetype2_INSTALL}/include/freetype2")
+target_include_directories(fontinfo PUBLIC ${freetype2_INCLUDE_DIRS})
 
 target_link_libraries(fontinfo
-	${CMAKE_JS_LIB}
-	${freetype2_INSTALL}/lib/freetype${CMAKE_STATIC_LIBRARY_SUFFIX})
+	optimized ${freetype2_RELEASE_LIBRARY}
+	debug ${freetype2_DEBUG_LIBRARY})
 
 add_dependencies(fontinfo freetype2)
 
