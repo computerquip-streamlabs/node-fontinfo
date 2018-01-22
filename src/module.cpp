@@ -62,9 +62,17 @@ NAN_METHOD(getFontInfo) {
 	
 	font_info *f_info = font_info_create(*filepath);
 	
+	if (!f_info) {
+		info.GetReturnValue().Set(Nan::Null());
+		return;
+	}
+	
 	/* We now have UTF16 and the size of the buffer, let V8 deal with the rest */
 	v8::Local<v8::Object> result = Nan::New<v8::Object>();
 	SetByString(result, "family_name", StringFromFontString(&f_info->family_name));
+	SetByString(result, "subfamily_name", StringFromFontString(&f_info->subfamily_name));
+	SetByString(result, "italic", Nan::New<v8::Boolean>(f_info->italic);
+	SetByString(result, "bold", Nan::New<v8::Boolean>(f_info->bold);
 	
 	font_info_destroy(f_info);
 	
