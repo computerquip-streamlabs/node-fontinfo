@@ -17,8 +17,6 @@ ExternalProject_Add(
 	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${freetype2_INSTALL}
 )
 
-include_directories(${CMAKE_JS_INC})
-
 set(fontinfo_SOURCES
 	src/fontinfo/fontinfo.c)
 	
@@ -38,8 +36,10 @@ target_link_libraries(fontinfo
 add_dependencies(fontinfo freetype2)
 
 
-add_library(node-fontinfo SHARED "src/module.cpp")
-target_link_libraries(node-fontinfo fontinfo)
+add_library(${PROJECT_NAME} SHARED "src/module.cpp")
+target_link_libraries(${PROJECT_NAME} fontinfo ${CMAKE_JS_LIB})
+set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_JS_INC})
 
 if(FONTINFO_BUILD_TESTS)
 	add_executable(simple_test "test/simple_test.c")
