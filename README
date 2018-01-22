@@ -1,0 +1,13 @@
+* Initial Readme *
+
+This project was born out of necessity in that I needed the family
+name of google fonts after I've added them to a private font collection 
+that doesn't persist after application shutdown. Google font metadata
+provides a family name but that's actually the preferred family name. 
+Unfortunately, GDI+ (and most other APIs I've found) will not use this 
+name for querying. I also have no way of fetching the family name through
+GDI+ unfortunately. 
+
+This is a pretty specific use case but if anyone feels they could use it, 
+I wouldn't mind expanding the project past the scope of my personal use
+case. Make an issue or suggestion if you want. 
