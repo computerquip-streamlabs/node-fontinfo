@@ -16,8 +16,7 @@
 */
 
 #include <nan.h>
-#include <locale>
-#include <codecvt>
+#include <cstdio>
 #include "fontinfo/fontinfo.h"
 #include "fontinfo/endian.h"
 
@@ -63,6 +62,7 @@ NAN_METHOD(getFontInfo) {
 	font_info *f_info = font_info_create(*filepath);
 	
 	if (!f_info) {
+		fprintf(stderr, "node-fontinfo: Failed to fetch font info\n");
 		info.GetReturnValue().Set(Nan::Null());
 		return;
 	}
@@ -71,8 +71,8 @@ NAN_METHOD(getFontInfo) {
 	v8::Local<v8::Object> result = Nan::New<v8::Object>();
 	SetByString(result, "family_name", StringFromFontString(&f_info->family_name));
 	SetByString(result, "subfamily_name", StringFromFontString(&f_info->subfamily_name));
-	SetByString(result, "italic", Nan::New<v8::Boolean>(f_info->italic);
-	SetByString(result, "bold", Nan::New<v8::Boolean>(f_info->bold);
+	SetByString(result, "italic", Nan::New<v8::Boolean>(f_info->italic));
+	SetByString(result, "bold", Nan::New<v8::Boolean>(f_info->bold));
 	
 	font_info_destroy(f_info);
 	
