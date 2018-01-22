@@ -1,0 +1,4 @@
+build/
+external/
+node_modules/
+yarn-error.log
