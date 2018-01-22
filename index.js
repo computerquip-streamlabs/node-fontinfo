@@ -1,1 +1,1 @@
-module.exports = require('build/Release/node-fontinfo');
+module.exports = require('./build/Release/node-fontinfo');
