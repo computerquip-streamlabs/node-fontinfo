@@ -9,21 +9,7 @@
 		"font",
 		"fonts"
 	],
-	"files": [
-		"index.js",
-		"CMakeLists.txt",
-		"build/Release/node-fontinfo.node",
-		"src",
-		"cmake"
-	],
-	"scripts": {
-		"build": "cmake-js",
-		"install": "npm run build"
-	},
-	"dependencies": {
-		"nan": "2.8.0"
-	},
 	"devDependencies": {
-		"cmake-js": "3.6.1"
+		"nan": "2.10.0"
 	}
 }
