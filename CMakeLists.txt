@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
-set(PROJECT_NAME "node_fontinfo")
-project(${PROJECT_NAME})
+project(node_fontinfo)
 
 set(freetype2_INSTALL ${CMAKE_BINARY_DIR}/freetype2)
 
@@ -42,9 +41,9 @@ target_link_libraries(fontinfo
 
 add_dependencies(fontinfo freetype2)
 
-add_nodejs_module(${PROJECT_NAME} "src/module.cpp")
-target_link_libraries(${PROJECT_NAME} fontinfo ${NODEJS_LIBRARIES})
-target_include_directories(${PROJECT_NAME} PUBLIC ${NODEJS_INCLUDE_DIRS})
+add_nodejs_module(node_fontinfo "src/module.cpp")
+target_link_libraries(node_fontinfo fontinfo ${NODEJS_LIBRARIES})
+target_include_directories(node_fontinfo PUBLIC ${NODEJS_INCLUDE_DIRS})
 
 if(FONTINFO_BUILD_TESTS)
 	add_executable(simple_test "test/simple_test.c")
@@ -52,5 +51,12 @@ if(FONTINFO_BUILD_TESTS)
 	target_include_directories(simple_test PUBLIC "src")
 endif()
 
-install(FILES $<TARGET_PDB_FILE:${PROJECT_NAME}> DESTINATION ${CMAKE_INSTALL_PREFIX} OPTIONAL)
-install(FILES $<TARGET_FILE:${PROJECT_NAME}> DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(FILES $<TARGET_PDB_FILE:node_fontinfo> DESTINATION ${CMAKE_INSTALL_PREFIX} OPTIONAL)
+install(FILES $<TARGET_FILE:node_fontinfo> DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+install(
+	FILES
+		${node_fontinfo_SOURCE_DIR}/package.json
+		${node_fontinfo_SOURCE_DIR}/main.js
+	DESTINATION
+		${CMAKE_INSTALL_PREFIX})
