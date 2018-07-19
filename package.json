@@ -3,11 +3,17 @@
 	"version": "0.0.2",
 	"description": "Native Node.js addon to fetch font info using freetype",
 	"license": "GPL-2.0+",
+	"main": "main.js",
 	"keywords": [
 		"freetype",
 		"freetype2",
 		"font",
 		"fonts"
+	],
+	"files": [
+		"node_fontinfo.node",
+		"node_fontinfo.pdb",
+		"main.js"
 	],
 	"devDependencies": {
 		"nan": "2.10.0"
